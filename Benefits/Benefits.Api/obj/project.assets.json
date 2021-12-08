@@ -54,11 +54,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\Benefits3\\Benefits.Api\\Benefits.Api.csproj",
+      "projectUniqueName": "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj",
       "projectName": "Benefits.Api",
-      "projectPath": "C:\\Workspace\\Benefits3\\Benefits.Api\\Benefits.Api.csproj",
+      "projectPath": "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\Benefits3\\Benefits.Api\\obj\\",
+      "outputPath": "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

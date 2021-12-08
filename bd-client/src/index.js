@@ -9,16 +9,14 @@ import './App.scss';
 
 import EnrolledList from "./components/EnrolledList";
 import Header from "./components/Header";
-import Toolbar2 from "./components/Toolbar2";
 
 ReactDOM.render(
   <React.StrictMode>
     <div className="container">
       <Header />
-      <Toolbar2 />
       <Router>
         <Switch>
-          <Route path="/enrollees">
+          <Route path="/">
             <EnrolledList />
           </Route>
         </Switch>

@@ -1,20 +1,19 @@
 function Toolbar({ showDependants, setShowDependants, setShowInputDialog }) {
     return (
-        <div className="row align-items-start">
-                <ul className="list-group">
-                    <li className="col-s-3 list-group-item">
-                        <button onClick={() => setShowInputDialog(true)}>Enter New Employee</button>
-                    </li>
-                    <li className="col-s-3 list-group-item">
-                        <label>Show Dependants &nbsp;</label>
-                        <input type="checkbox"
-                            checked={showDependants}
-                            onChange={(event) => { setShowDependants(event.target.checked); }}
-                        />
-                    </li>
-                </ul>
+        <div className="d-flex justify-content-center">
+            <div className="m-2">
+                <button onClick={() => setShowInputDialog(true)}>Enter New Employee</button>
             </div>
-        
+
+            <div className="m-2">
+                <input type="checkbox" className="form-check-input me-1"
+                    checked={showDependants}
+                    onChange={(event) => { setShowDependants(event.target.checked); }}
+                />
+                Show Dependants
+            </div>
+        </div>
+
     );
 }
 

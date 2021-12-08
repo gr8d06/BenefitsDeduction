@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Benefits.Api.Interfaces;
 using Benefits.Api.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace Benefits.Api.Controllers
-{
+namespace Benefits.Api.Controllers { 
+
+    [EnableCors("AllowOrigin")]
     [ApiController]
     [Route("[controller]")]
     public class EnrolleesController : ControllerBase
@@ -21,10 +23,11 @@ namespace Benefits.Api.Controllers
         //        new Primary(){Id = 1, FirstName="Alex", LastName="Dane", IsPrimary=true, IsActive=true, Address="5457 S 700 E, Whitestown, IN 46075", EnrolledDate=DateTime.Now.Date, PolicyNumber=123, PrimaryId=0, Relation="Primary" } 
         //    };
         //}
+
         [HttpGet]
         public object Get()
         {
-            string enrolleeList = System.IO.File.ReadAllText("C:\\Workspace\\Benefits3\\Benefits.Api\\Enrollees.json");
+            string enrolleeList = System.IO.File.ReadAllText("C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\Enrollees.json");
             //object jsonObj = JsonConvert.SerializeObject(enrolleeList);
             return enrolleeList;
         }

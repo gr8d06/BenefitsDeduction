@@ -1,5 +1,4 @@
 //snippet rfce
-import "./NewEnrolleeForm";
 import NewEnrolleeForm from "./NewEnrolleeForm";
 
 function Popup(props) {

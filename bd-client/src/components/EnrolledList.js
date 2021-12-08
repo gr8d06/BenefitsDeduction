@@ -1,14 +1,30 @@
-import { data } from "../CustomerData";
+//import { data } from "../CustomerData";
 import Primary from "./Primary";
 import Toolbar from "./Toolbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Popup from "./Popup";
 
 function EnrolledList() {
 
-    const [customerData, setCustomerData] = useState(data);
+    const [customerData, setCustomerData] = useState([]);
     const [showDependants, setShowDependants] = useState(true);
     const [showInputDialog, setShowInputDialog] = useState(false);
+
+    useEffect(() => {
+        fetchEnrolleeData();
+    }, [])
+
+    const fetchEnrolleeData = async () => {
+        try {
+            const response = await fetch("http://localhost:8888/enrollees"); // { mode: 'no-cors' }
+            const data = await response.json();
+            setCustomerData(data);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
 
     return (
         <div>
