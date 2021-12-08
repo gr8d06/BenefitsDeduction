@@ -7,7 +7,7 @@ function Primary({ enrolleeList, showDependants }) {
         <div key={id} className="col-md-12  border border-primary row">
             <div className="border border-warning">
                 <div>Name: {first} {last} </div>
-                <div>Id: {id} Enrolled Date: {enrolledDate} Active: {active.toString()}</div>
+                <div>Id: {id} Enrolled Date: {enrolledDate} Active: {active}</div>
                 <div>Address: {address} </div>
                 <div>Policy Number: {policyNumber} Primary Id: {primaryId} Relation: {relation}</div>
             </div>

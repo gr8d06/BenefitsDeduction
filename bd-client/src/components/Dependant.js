@@ -5,7 +5,7 @@ function Dependant(props) {
             <div>Name: {first} {last} </div>
             <div>Id: {id}</div>
             <div>Enrolled Date: {enrolledDate}</div>
-            <div>Active: {active.toString()}</div>
+            <div>Active: {active}</div>
             <div>Relation: {relation}</div>
         </div>
     );
