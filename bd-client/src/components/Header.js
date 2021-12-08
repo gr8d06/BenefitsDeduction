@@ -23,22 +23,6 @@ function Header() {
                 </div>
             </div>
         </div>
-
-
-
-
-
-        /*
-                <header className="row" style={{ border: "solid black 2px" }}>
-                    <div className="col-md-3 " style={{ border: "solid blue 2px", paddingTop: "10px" }}>
-                        <img src={mainLogo} className="mainLogo" alt="mainLogo" />
-                    </div>
-        
-                    <div className="col-md-9 mt-5 subtitle" style={{ border: "solid red 2px", float: "left" }}>
-                        Welcome to your new benefits landing page!
-                    </div>
-                </header>
-        */
     );
 }
 

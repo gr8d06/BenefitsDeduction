@@ -5,7 +5,7 @@ import EnrolledList from './components/EnrolledList'
 
 function App() {
   return (
-    <div className="enrolled-list container">
+    <div className="container">
       <Header />
       <EnrolledList />
     </div>

@@ -13,10 +13,10 @@ function EnrolledList() {
     return (
         <div>
             <Toolbar showDependants={showDependants} setShowDependants={setShowDependants} showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog} />
-            <div key="enrolledList">
+            <div className="enrolleeList  d-grid gap-3">
                 {customerData.map(enrolleeList => <Primary enrolleeList={enrolleeList} setCustomerData={setCustomerData} showDependants={showDependants} />)}
             </div>
-            <Popup showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog}><h3>My Popup</h3></Popup>
+            <Popup showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog} />
         </div>
     );
 }
