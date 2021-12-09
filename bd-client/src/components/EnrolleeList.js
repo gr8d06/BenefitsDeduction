@@ -4,7 +4,7 @@ import Toolbar from "./Toolbar";
 import { useState, useEffect } from "react";
 import Popup from "./Popup";
 
-function EnrolledList() {
+function EnrolleeList() {
 
     const [customerData, setCustomerData] = useState([]);
     const [showDependants, setShowDependants] = useState(true);
@@ -16,7 +16,7 @@ function EnrolledList() {
 
     const fetchEnrolleeData = async () => {
         try {
-            const response = await fetch("http://localhost:8888/enrollees"); // { mode: 'no-cors' }
+            const response = await fetch("http://localhost:8888/enrollees"); 
             const data = await response.json();
             setCustomerData(data);
         }
@@ -29,7 +29,7 @@ function EnrolledList() {
     return (
         <div>
             <Toolbar showDependants={showDependants} setShowDependants={setShowDependants} showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog} />
-            <div className="enrolleeList  d-grid gap-3">
+            <div key = "mainEnrolleeList" className="enrolleeList  d-grid gap-3">
                 {customerData.map(enrolleeList => <Primary enrolleeList={enrolleeList} setCustomerData={setCustomerData} showDependants={showDependants} />)}
             </div>
             <Popup showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog} />
@@ -37,4 +37,4 @@ function EnrolledList() {
     );
 }
 
-export default EnrolledList;
+export default EnrolleeList;

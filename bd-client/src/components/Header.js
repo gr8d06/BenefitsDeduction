@@ -13,11 +13,7 @@ function Header() {
                         </h4>
                     </div>
                     <div>
-                        Hello User &nbsp;&nbsp;
-                        <span>
-                            <a href="#">sign-out</a>
-                        </span>
-
+                        Hello User 
                     </div>
                 </div>
         </div>

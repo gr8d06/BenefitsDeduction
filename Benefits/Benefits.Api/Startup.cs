@@ -26,9 +26,9 @@ namespace Benefits.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddDefaultPolicy(
+            services.AddCors(options => options.AddPolicy("AllowEverything",
              builder => {
-                builder.WithOrigins("http://localhost:3000")
+                builder.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
@@ -43,11 +43,13 @@ namespace Benefits.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("AllowEverything");
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors();
+            
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free';
 import './App.scss';
 
-import EnrolledList from "./components/EnrolledList";
+import EnrolleeList from "./components/EnrolleeList";
 import Header from "./components/Header";
 
 ReactDOM.render(
@@ -17,7 +17,7 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path="/">
-            <EnrolledList />
+            <EnrolleeList />
           </Route>
         </Switch>
       </Router>

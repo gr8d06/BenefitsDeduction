@@ -1,8 +1,8 @@
-import EnrolledList from './components/EnrolledList'
+import EnrolleeList from './components/EnrolleeList'
 
 function App() {
   return (
-    <EnrolledList />
+    <EnrolleeList />
   );
 }
 
