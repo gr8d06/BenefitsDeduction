@@ -9,10 +9,10 @@ function NewEnrolleeForm() {
     
     const [newEnrollee, setNewEnrollee] = useState({firstName:"", lastName:"", address:"", isPrimary:false, primaryId:0, relation:""})
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
        
-        fetch('http://localhost:8888/enrollees',{
+        await fetch('http://localhost:8888/enrollees',{
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(newEnrollee)
