@@ -17,18 +17,18 @@ namespace Benefits.Api.Controllers {
 
 
         [HttpGet]
-        public object Get()
+        public IActionResult Get()
         {
             string enrolleeList = System.IO.File.ReadAllText(".\\Enrollees.json");
             //object jsonObj = JsonConvert.SerializeObject(enrolleeList);
-            return enrolleeList;
+            return Ok(enrolleeList);
         }
 
         [HttpPost]
-        public object Post()
+        public IActionResult Post()
         {
 
-            return "post hit";
+            return Ok("post hit");
         }
 
     }
