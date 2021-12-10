@@ -20,7 +20,8 @@ namespace Benefits.Api.Models
         public int PrimaryId { get; set; }
         public string Relation { get; set; }
 
-        public List<EnrolleeDto> Dependants { get; set; }
+        public decimal PayCheckDeduction { get; set; }
 
+        public List<IEnrollee> DependantsList { get; set; }
     }
 }

@@ -2,7 +2,6 @@ USE [Benefits]
 GO
 
 DROP PROCEDURE IF EXISTS dbo.InsertEnrollee;
-
 GO
 
 CREATE PROCEDURE InsertEnrollee 
@@ -25,7 +24,6 @@ USE [Benefits]
 GO
 
 DROP PROCEDURE IF EXISTS dbo.SelectAllEnrollees;
-
 GO
 
 CREATE PROCEDURE SelectAllEnrollees 

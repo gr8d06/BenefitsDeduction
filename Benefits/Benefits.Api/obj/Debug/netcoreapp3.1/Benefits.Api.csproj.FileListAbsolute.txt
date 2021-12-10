@@ -75,3 +75,11 @@ C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\run
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

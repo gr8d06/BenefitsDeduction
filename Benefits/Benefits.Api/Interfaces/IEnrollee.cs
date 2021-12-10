@@ -18,5 +18,7 @@ namespace Benefits.Api.Interfaces
         public int PolicyNumber { get; set; }
         public int PrimaryId { get; set; }
         public string Relation { get; set; }
+        public decimal PayCheckDeduction { get; set; }
+        public List<IEnrollee> DependantsList { get; set;}
     }
 }

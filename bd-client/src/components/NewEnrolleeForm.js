@@ -7,7 +7,7 @@ import { useState } from "react";
 
 function NewEnrolleeForm() {
     
-    const [newEnrollee, setNewEnrollee] = useState({firstName:"", lastName:"", address:"", isPrimary:false, primaryId:0, relation:""})
+    const [newEnrollee, setNewEnrollee] = useState({firstName:"", lastName:"", address:"", isPrimary:true, primaryId:0, relation:""})
 
     const handleSubmit = async (e) => {
         e.preventDefault();

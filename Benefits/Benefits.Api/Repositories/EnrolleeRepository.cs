@@ -35,6 +35,7 @@ namespace Benefits.Api.Repositories
         public  List<IEnrollee> SelectAllEnrollees()
         {            
             List<IEnrollee> enrolleeList = new List<IEnrollee>(); ;
+            List<IEnrollee> primaryList = new List<IEnrollee>(); ;
 
             try
             {
@@ -50,16 +51,21 @@ namespace Benefits.Api.Repositories
                     enrolleeList.Add(enrollee);
                 }
 
-                //enrolleeList.GroupBy(x => x.PrimaryId).Select(y => new)
-                //Create a subset/list of dependants, group by primaryId, assign the groups to dependants where primaryId = Id.
+                primaryList = enrolleeList.Where(x=>x.IsPrimary == true).ToList();
+                var dependantsList = enrolleeList.Where(x=> x.IsPrimary == false).ToList();
 
+                foreach(var primary in primaryList)
+                {
+                    primary.DependantsList = dependantsList.Where(d => d.PrimaryId == primary.Id).ToList();
+                }
+                
             }
             catch(Exception e)
             {
                 Console.WriteLine($"An error has occured. {e.Message}");
             }
 
-            return enrolleeList;
+            return primaryList;
         }
 
         public IEnrollee SelectEnrolleeById(int Id)
@@ -80,11 +86,13 @@ namespace Benefits.Api.Repositories
                 FirstName = reader["FirstName"].ToString(),
                 LastName = reader["LastName"].ToString(),
                 IsActive = (bool)reader["IsActiveAccount"],
-                IsPrimary = (bool)reader["IsActiveAccount"],
+                IsPrimary = (bool)reader["IsPrimary"],
                 EnrolledDate = Convert.ToDateTime(reader["StartDate"]).Date,
                 PrimaryId = Convert.ToInt32(reader["PrimaryId"]),
                 Address = reader["Address"].ToString(),
-                Relation = reader["Relation"].ToString()
+                Relation = reader["Relation"].ToString(),
+                PolicyNumber = Convert.ToInt32(reader["PolicyId"]),
+                PayCheckDeduction = decimal.Round(Convert.ToDecimal(reader["PaycheckDeduction"]),2,MidpointRounding.AwayFromZero)
             };
         }
 
