@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Benefits.Api.Models
 {
-    public class Dependant : IEnrollee
+    public class EnrolleeDto : IEnrollee
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -19,5 +19,8 @@ namespace Benefits.Api.Models
         public int PolicyNumber { get; set; }
         public int PrimaryId { get; set; }
         public string Relation { get; set; }
+
+        public List<EnrolleeDto> Dependants { get; set; }
+
     }
 }

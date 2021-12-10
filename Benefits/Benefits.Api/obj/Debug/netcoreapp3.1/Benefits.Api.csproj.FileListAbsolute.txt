@@ -35,8 +35,6 @@ C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\New
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.csprojAssemblyReference.cache
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.AssemblyInfoInputs.cache
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.AssemblyInfo.cs
-C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.csproj.CoreCompileInputs.cache
-C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.RazorTargetAssemblyInfo.cache
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.csproj.CopyComplete
 C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\staticwebassets\Benefits.Api.StaticWebAssets.Manifest.cache
@@ -67,3 +65,13 @@ C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.pdb
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.genruntimeconfig.cache
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.csproj.AssemblyReference.cache
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.csproj.CoreCompileInputs.cache
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Workspace\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

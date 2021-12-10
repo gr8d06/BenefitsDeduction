@@ -1,28 +1,6 @@
 USE [Benefits]
 GO
 
-IF OBJECT_ID('Address') IS NULL
-BEGIN
-CREATE TABLE [Address] (
-	Id		INT IDENTITY(1,1) PRIMARY KEY,
-	Street1 NVARCHAR(50) NOT NULL,
-	Street2 NVARCHAR(50) NOT NULL DEFAULT '',
-	City	NVARCHAR(50) NOT NULL,
-	Zip		NVARCHAR(10) NOT NULL,
-	[State] NVARCHAR(50) NOT NULL,
-	Country NVARCHAR(50) NOT NULL
-);
-END;
-/* Could create another table with "previous addresses" to have a historical recor upon change or multiple residences.  */
-
---Seed Data
-IF NOT EXISTS(SELECT 1 FROM [Address] WHERE Street1 = '5457 S 700 E')
-BEGIN
-	INSERT INTO [Address] (Street1, City, Zip, [State], Country)
-	Values ('5457 S 700 E', 'Whitestown', 'IN', '46075', 'United States');
-END;
-
-
 IF OBJECT_ID('Policy') IS NULL
 BEGIN
 CREATE TABLE [Policy] (
@@ -52,6 +30,7 @@ BEGIN
 		IsPrimary		BIT NOT NULL DEFAULT 0,
 		StartDate		DATE NOT NULL DEFAULT GETDATE(),	
 		PrimaryId		INT NOT NULL DEFAULT 0,
+		Relation		NVARCHAR(50),
 		/*FKs*/ 
 		AddressId		INT NOT NULL,
 		PolicyId		INT NOT NULL
@@ -60,14 +39,15 @@ END;
 
 IF NOT EXISTS(SELECT 1 FROM Enrollee WHERE FirstName IN ('Alex','Aardvark'))
 BEGIN
-INSERT INTO Enrollee (FirstName, LastName, IsActiveAccount, IsPrimary, StartDate, PrimaryId, AddressId, PolicyId)
-VALUES	('Alex',		'Dane', 1, 1, GETDATE(), 0, 1, 1),
-		('Aardvark',	'Dane', 1, 0, GETDATE(), 1, 1, 1);
+INSERT INTO Enrollee (FirstName, LastName, IsActiveAccount, IsPrimary, StartDate, PrimaryId, AddressId, PolicyId, Relation)
+VALUES	('Alex',		'Dane', 1, 1, GETDATE(), 0, 1, 1, 'Primary'),
+		('Aardvark',	'Dane', 1, 0, GETDATE(), 1, 1, 1, 'Spouse');
 
-		DECLARE @tmpDate DATE;
-		SELECT @tmpDate = GETDATE();
-		EXEC dbo.InsertEnrollee @FirstName = 'Cheetah', @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 0, @StartDate = @tmpDate, @PrimaryId = 1, @AddressId = 1, @PolicyId = 1;
+DECLARE @tmpDate DATE;
+SELECT @tmpDate = GETDATE();
+EXEC dbo.InsertEnrollee @FirstName = 'Baboon', @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 0, @StartDate = @tmpDate, @PrimaryId = 1, @AddressId = 1, @PolicyId = 1, @Relation = 'Child';
 END;
+
 
 
 

@@ -48,8 +48,6 @@ namespace Benefits.Api
             }
             app.UseCors("AllowEverything");
 
-            //app.UseHttpsRedirection();
-
             app.UseRouting();
             
             app.UseAuthorization();
