@@ -1,5 +1,8 @@
 -- Server=localhost;Database=master;Trusted_Connection=True;
 
+--After thoughts from Alex: A better naming convention for the Stored Procedures (object name THEN action) e.g. EnrolleeDeleteById
+--this makes the procedure easier to find in the list, by grouping alphabetically / by object. 
+
 --Setup Policy table
 USE [Benefits]
 GO
@@ -16,6 +19,7 @@ CREATE TABLE [Policy] (
 END;
 
 --Setup Policy Sprocs
+
 	--Create
 	USE [Benefits]
 	GO
@@ -51,6 +55,26 @@ END;
 		
 		SELECT Id, IsActive, [Description], PrimaryPrice, DependantPrice
 		FROM dbo.Policy;
+		
+	END;
+	GO
+
+	--READ By Id
+	
+	USE [Benefits]
+	GO
+
+	DROP PROCEDURE IF EXISTS dbo.SelectAllPolicies;
+	GO
+
+	CREATE PROCEDURE SelectPolicyById
+	@Id INT
+	AS
+	BEGIN;
+		
+		SELECT Id, IsActive, [Description], PrimaryPrice, DependantPrice
+		FROM dbo.Policy
+		WHERE Id = @Id;
 		
 	END;
 	GO

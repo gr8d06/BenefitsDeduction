@@ -9,10 +9,12 @@ function EnrolleeList() {
     const [customerData, setCustomerData] = useState([]);
     const [showDependants, setShowDependants] = useState(true);
     const [showInputDialog, setShowInputDialog] = useState(false);
+    const [refreshList, setrefreshList] = useState(false);
 
     useEffect(() => {
         fetchEnrolleeData();
-    }, [])
+        setrefreshList(false);
+    }, [refreshList])
 
     const fetchEnrolleeData = async () => {
         try {
@@ -25,15 +27,13 @@ function EnrolleeList() {
         }
     }
 
-    /* Need to map the total deduction into the enrollee that gets passed on to Primary & Dependants*/
-
     return (
         <div>
             <Toolbar showDependants={showDependants} setShowDependants={setShowDependants} showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog} />
             <div key="mainEnrolleeList" className="enrolleeList  d-grid gap-3">
                 {customerData.map(enrolleeList => <Primary enrolleeList={enrolleeList} setCustomerData={setCustomerData} showDependants={showDependants} />)}
             </div>
-            <Popup showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog} />
+            <Popup showInputDialog={showInputDialog} setShowInputDialog={setShowInputDialog} setrefreshList={setrefreshList} />
         </div>
     );
 }
