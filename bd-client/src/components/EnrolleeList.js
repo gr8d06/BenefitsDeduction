@@ -11,6 +11,7 @@ function EnrolleeList() {
     const [showInputDialog, setShowInputDialog] = useState(false);
     const [refreshList, setrefreshList] = useState(false);
 
+    //This didn't update with a primary
     useEffect(() => {
         fetchEnrolleeData();
         setrefreshList(false);

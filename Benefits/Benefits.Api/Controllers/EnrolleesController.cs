@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Benefits.Api.Interfaces;
 using Benefits.Api.Models;
 using Benefits.Api.Repositories;
+using Benefits.Api.Validators;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -66,52 +67,17 @@ namespace Benefits.Api.Controllers {
         {
             try
             {
-                PolicyRepository polRepo = new PolicyRepository();
-                var policy = polRepo.SelectPolicyById(1);  //HARD CODED for demo and time sake only. 
-
-                if (enrollee == null ||
-                    string.IsNullOrEmpty(enrollee.FirstName) ||
-                    string.IsNullOrEmpty(enrollee.LastName) ||
-                    string.IsNullOrEmpty(enrollee.Address))
+               bool result = DtoValidator.ValidateEnrolleeDto(enrollee);
+                if (result)
                 {
-                    return BadRequest();
+                    return Ok();
                 }
-
-                if (enrollee.IsPrimary)
-                {
-                    enrollee.PayCheckDeduction = CalculateRate(policy.PrimaryPrice, enrollee.FirstName);
-                }
-                else
-                {
-                    //this should be a dependant with a valid id that links to a primary.
-                    if (enrollee.PrimaryId <= 0)
-                    {
-                        return BadRequest();
-                    }
-
-                    enrollee.PayCheckDeduction = CalculateRate(policy.DependantPrice, enrollee.FirstName);
-                }
-
-                EnrolleeRepository enrolleeRepo = new EnrolleeRepository();
-                enrolleeRepo.InsertEnrollee(enrollee);
-
-                return Ok();
+                return BadRequest();
             }
             catch
             {
                 return StatusCode(500);
             }
-        }
-
-        private decimal CalculateRate(decimal yearlyRate, string firstName)
-        {
-            decimal deductionRate = yearlyRate / 26;
-            if (firstName.ToLower()[0] == 'a') 
-            {
-                deductionRate *= 0.9M;
-            }
-            
-            return Math.Round(deductionRate,2,MidpointRounding.AwayFromZero);
         }
 
     }
