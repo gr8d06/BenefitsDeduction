@@ -1,6 +1,6 @@
 ﻿namespace Benefits.Api.Models
 {
-    public class Policy
+    public class PolicyDto
     {
         public int Id { get; set; }
         public bool IsActive { get; set; }

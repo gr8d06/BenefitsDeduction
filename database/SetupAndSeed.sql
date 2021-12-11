@@ -1,7 +1,5 @@
 -- Server=localhost;Database=master;Trusted_Connection=True;
 
-
-
 --Setup Policy table
 USE [Benefits]
 GO

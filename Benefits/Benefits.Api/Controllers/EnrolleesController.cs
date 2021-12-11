@@ -37,10 +37,65 @@ namespace Benefits.Api.Controllers {
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            IActionResult result;
             try
             {
-                string enrolleeList = System.IO.File.ReadAllText(".\\Enrollees.json");
-                return Ok(enrolleeList);
+                var repo = new EnrolleeRepository();
+                var enrollee = repo.SelectEnrolleeById(id);
+
+                if (enrollee.Id == id)
+                {
+                    result = Ok(enrollee);
+                }
+                else
+                {
+                    result = NotFound();
+                }
+                
+            }
+            catch
+            {
+                result = StatusCode(500);
+            }
+            return result;
+        }
+
+
+        [HttpPost]
+        public IActionResult Post(EnrolleeDto enrollee)
+        {
+            try
+            {
+                PolicyRepository polRepo = new PolicyRepository();
+                var policy = polRepo.SelectPolicyById(1);  //HARD CODED for demo and time sake only. 
+
+                if (enrollee == null ||
+                    string.IsNullOrEmpty(enrollee.FirstName) ||
+                    string.IsNullOrEmpty(enrollee.LastName) ||
+                    string.IsNullOrEmpty(enrollee.Address))
+                {
+                    return BadRequest();
+                }
+
+                if (enrollee.IsPrimary)
+                {
+                    enrollee.PayCheckDeduction = CalculateRate(policy.PrimaryPrice, enrollee.FirstName);
+                }
+                else
+                {
+                    //this should be a dependant with a valid id that links to a primary.
+                    if (enrollee.PrimaryId <= 0)
+                    {
+                        return BadRequest();
+                    }
+
+                    enrollee.PayCheckDeduction = CalculateRate(policy.DependantPrice, enrollee.FirstName);
+                }
+
+                EnrolleeRepository enrolleeRepo = new EnrolleeRepository();
+                enrolleeRepo.InsertEnrollee(enrollee);
+
+                return Ok();
             }
             catch
             {
@@ -48,11 +103,15 @@ namespace Benefits.Api.Controllers {
             }
         }
 
-
-        [HttpPost]
-        public IActionResult Post()
+        private decimal CalculateRate(decimal yearlyRate, string firstName)
         {
-            return Ok("post hit");
+            decimal deductionRate = yearlyRate / 26;
+            if (firstName.ToLower()[0] == 'a') 
+            {
+                deductionRate *= 0.9M;
+            }
+            
+            return Math.Round(deductionRate,2,MidpointRounding.AwayFromZero);
         }
 
     }

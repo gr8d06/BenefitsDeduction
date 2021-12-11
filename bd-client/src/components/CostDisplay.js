@@ -1,11 +1,10 @@
 import React from 'react'
 
 function CostDisplay(props) {
-    const { id, monthlyDeduction, discountRate } = props;
+    const { id, monthlyDeduction: totalMonthlyDeduction } = props;
     return (
         <div key={id} className="border border-primary col-md-6" >
-            <div className="fs-2">Monthly Deduction: {monthlyDeduction}</div>
-            <div className="fs-3">Discount Applied: {discountRate}%</div>
+            <div className="fs-2">Total Monthly Deduction: {totalMonthlyDeduction}</div>
         </div>
     )
 }

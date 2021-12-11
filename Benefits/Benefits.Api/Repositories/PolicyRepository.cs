@@ -1,6 +1,7 @@
 ﻿using Benefits.Api.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Benefits.Api.Repositories
@@ -18,6 +19,7 @@ namespace Benefits.Api.Repositories
                 connection.Open();
 
                 using SqlCommand command = new SqlCommand(PolicySprocs.SelectAll, connection);
+                command.CommandType = CommandType.StoredProcedure;
                 using SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -42,11 +44,14 @@ namespace Benefits.Api.Repositories
                 connection.Open();
 
                 using SqlCommand command = new SqlCommand(PolicySprocs.SelectById, connection);
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", id);
-
+                
                 using SqlDataReader reader = command.ExecuteReader();
-                policy = MapPolicyDto(reader);
-
+                while (reader.Read())
+                {
+                    policy = MapPolicyDto(reader);
+                }
             }
             catch (Exception ex)
             {
@@ -56,14 +61,58 @@ namespace Benefits.Api.Repositories
 
         }
 
-        private PolicyDto MapPolicyDto(SqlDataReader reader) => new PolicyDto()
+        public void InsertPolicy(PolicyDto policy)
         {
-            Id = Convert.ToInt32(reader["Id"]),
-            IsActive = (bool)reader["IsActive"],
-            Description = reader["Description"].ToString(),
-            PrimaryPrice = decimal.Round(Convert.ToDecimal(reader["PrimaryPrice"]), 2, MidpointRounding.AwayFromZero),
-            DependantPrice = decimal.Round(Convert.ToDecimal(reader["DependantPrice"]), 2, MidpointRounding.AwayFromZero)
-        };
+            try
+            {
+                using SqlConnection connection = new SqlConnection(_connectionString);
+                connection.Open();
+
+                using SqlCommand command = new SqlCommand(PolicySprocs.SelectById, connection);
+                command.Parameters.AddWithValue("@IsActive", policy.IsActive);
+                command.Parameters.AddWithValue("@Description", policy.Description);
+                command.Parameters.AddWithValue("@PrimaryPrice", policy.PrimaryPrice);
+                command.Parameters.AddWithValue("@DependantPrice", policy.DependantPrice);
+
+                command.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void DeletePolicyById(int id)
+        {
+            try
+            {
+                using SqlConnection connection = new SqlConnection(_connectionString);
+                connection.Open();
+
+                using SqlCommand command = new SqlCommand(PolicySprocs.Delete, connection);
+                command.Parameters.AddWithValue("@Id", id);
+
+               var result = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private PolicyDto MapPolicyDto(SqlDataReader reader) 
+        {
+            PolicyDto policy = new PolicyDto
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                IsActive = (bool)reader["IsActive"],
+                Description = reader["Description"].ToString(),
+                PrimaryPrice = decimal.Round(Convert.ToDecimal(reader["PrimaryPrice"]), 2, MidpointRounding.AwayFromZero),
+                DependantPrice = decimal.Round(Convert.ToDecimal(reader["DependantPrice"]), 2, MidpointRounding.AwayFromZero)
+            };
+
+            return policy;
+        }
 
 
 

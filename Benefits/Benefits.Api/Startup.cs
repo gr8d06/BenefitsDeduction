@@ -52,6 +52,8 @@ namespace Benefits.Api
             
             app.UseAuthorization();
 
+            app.UseStatusCodePages();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
