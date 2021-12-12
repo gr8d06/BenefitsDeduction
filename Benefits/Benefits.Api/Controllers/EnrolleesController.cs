@@ -6,7 +6,6 @@ using Benefits.Api.Interfaces;
 using Benefits.Api.Models;
 using Benefits.Api.Repositories;
 using Benefits.Api.Validators;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -16,17 +15,18 @@ namespace Benefits.Api.Controllers {
     [Route("[controller]")]
     public class EnrolleesController : ControllerBase
     {
-
-        public EnrolleesController()
-        {}
+        IEnrolleeRepository enrolleeRepository = null;
+        public EnrolleesController(IEnrolleeRepository enrolleeRepository)
+        {
+            this.enrolleeRepository = enrolleeRepository;
+        }
 
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                var repo = new EnrolleeRepository();
-                var enrolleeList = repo.SelectAllEnrollees();
+                var enrolleeList = enrolleeRepository.SelectAllEnrollees();
                 return Ok(enrolleeList);
             }
             catch
@@ -41,8 +41,7 @@ namespace Benefits.Api.Controllers {
             IActionResult result;
             try
             {
-                var repo = new EnrolleeRepository();
-                var enrollee = repo.SelectEnrolleeById(id);
+                var enrollee = enrolleeRepository.SelectEnrolleeById(id);
 
                 if (enrollee.Id == id)
                 {
@@ -52,7 +51,6 @@ namespace Benefits.Api.Controllers {
                 {
                     result = NotFound();
                 }
-                
             }
             catch
             {

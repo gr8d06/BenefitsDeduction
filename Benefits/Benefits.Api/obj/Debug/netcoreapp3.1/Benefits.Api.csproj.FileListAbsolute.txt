@@ -24,7 +24,6 @@ C:\Workspace\Benefits3\Benefits.Api\obj\Debug\netcoreapp3.1\Benefits.Api.csproj.
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\appsettings.json
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\Enrollees.json
-C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\Benefits.Api.StaticWebAssets.xml
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\Benefits.Api.exe
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\Benefits.Api.deps.json
 C:\personalCode\BenefitsDeduction\Benefits\Benefits.Api\bin\Debug\netcoreapp3.1\Benefits.Api.runtimeconfig.json

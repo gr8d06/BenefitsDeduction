@@ -6,10 +6,10 @@ using System.Data.SqlClient;
 
 namespace Benefits.Api.Repositories
 {
-    public class PolicyRepository
+    public class PolicyRepository : IPolicyRepository
     {
         private string _connectionString = "Data Source=localhost;Initial Catalog=Benefits;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        
+
         public List<PolicyDto> SelectAllPolicies()
         {
             var policyList = new List<PolicyDto>();
@@ -29,15 +29,15 @@ namespace Benefits.Api.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message); 
+                Console.WriteLine(ex.Message);
             }
             return policyList;
-            
+
         }
 
         public PolicyDto SelectPolicyById(int id)
         {
-            var policy= new PolicyDto();
+            var policy = new PolicyDto();
             try
             {
                 using SqlConnection connection = new SqlConnection(_connectionString);
@@ -46,7 +46,7 @@ namespace Benefits.Api.Repositories
                 using SqlCommand command = new SqlCommand(PolicySprocs.SelectById, connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", id);
-                
+
                 using SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
@@ -76,7 +76,7 @@ namespace Benefits.Api.Repositories
 
                 command.ExecuteNonQuery();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -92,7 +92,7 @@ namespace Benefits.Api.Repositories
                 using SqlCommand command = new SqlCommand(PolicySprocs.Delete, connection);
                 command.Parameters.AddWithValue("@Id", id);
 
-               var result = command.ExecuteNonQuery();
+                var result = command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -100,7 +100,7 @@ namespace Benefits.Api.Repositories
             }
         }
 
-        private PolicyDto MapPolicyDto(SqlDataReader reader) 
+        private PolicyDto MapPolicyDto(SqlDataReader reader)
         {
             PolicyDto policy = new PolicyDto
             {

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
+using Benefits.Api.Repositories;
 
 namespace Benefits.Api
 {
@@ -35,6 +36,9 @@ namespace Benefits.Api
             }));
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //inject the repositories into the controllers. 
+            services.AddScoped<IEnrolleeRepository, EnrolleeRepository>();
+            services.AddScoped<IPolicyRepository, PolicyRepository>();  
 
             services.AddControllers();
         }
