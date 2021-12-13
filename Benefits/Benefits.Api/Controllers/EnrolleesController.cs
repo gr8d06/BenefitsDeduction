@@ -65,9 +65,11 @@ namespace Benefits.Api.Controllers {
         {
             try
             {
-               bool result = DtoValidator.ValidateEnrolleeDto(enrollee);
+               bool result = EnrolleeDtoValidator.ValidateEnrolleeDto(enrollee);
                 if (result)
                 {
+                    EnrolleeRepository enrolleeRepo = new EnrolleeRepository();
+                    enrolleeRepo.InsertEnrollee(enrollee);
                     return Ok();
                 }
                 return BadRequest();

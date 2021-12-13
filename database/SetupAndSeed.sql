@@ -4,6 +4,13 @@
 --this makes the procedure easier to find in the list, by grouping alphabetically / by object. 
 
 --Setup Policy table
+--USE [Benefits]
+--GO
+--DROP TABLE [Policy];
+--DROP TABLE [Enrollee];
+--GO
+
+
 USE [Benefits]
 GO
 

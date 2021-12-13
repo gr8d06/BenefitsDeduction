@@ -16,8 +16,8 @@ function Primary({ enrolleeList, showDependants }) {
 
 
     return (
-        <div key={id} className="col-md-12  border border-primary row">
-            <div className="border border-warning col-md-6">
+        <div key={id} className="col-md-12  border border-primary row rounded">
+            <div className="border border-primary col-md-6">
                 <div>Name: {firstName} {lastName} </div>
                 <div>Id: {id}</div>
                 <div>Enrolled Date: {new Date(enrolledDate).toLocaleDateString("en-US")} </div>

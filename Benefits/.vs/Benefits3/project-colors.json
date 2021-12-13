@@ -10,7 +10,17 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "5698f620-f84e-432c-97e0-4c55d1ca3bdb": {
+      "ProjectGuid": "5698f620-f84e-432c-97e0-4c55d1ca3bdb",
+      "DisplayName": "Benefits.Api.Test",
+      "ColorIndex": 1
+    },
+    "c9db9c4b-f885-4c0d-a2a4-44493439ab8d": {
+      "ProjectGuid": "c9db9c4b-f885-4c0d-a2a4-44493439ab8d",
+      "DisplayName": "BenefitsTest",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }
