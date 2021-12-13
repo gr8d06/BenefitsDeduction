@@ -11,6 +11,12 @@ namespace Benefits.Api.Controllers
     [ApiController]
     public class PolicyController : ControllerBase
     {
+        IPolicyRepository policyRepository = null;
+        public PolicyController(IPolicyRepository policyRepository)
+        {
+            this.policyRepository = policyRepository;
+        }
+
         // GET: api/<PolicyController>
         [HttpGet]
         public IActionResult Get()
@@ -19,8 +25,7 @@ namespace Benefits.Api.Controllers
 
             try
             {
-                var repo = new PolicyRepository();
-                policies = repo.SelectAllPolicies();
+                policies = policyRepository.SelectAllPolicies();
             }
             catch
             {
@@ -39,8 +44,7 @@ namespace Benefits.Api.Controllers
 
             try
             {
-                var repo = new PolicyRepository();
-                policy = repo.SelectPolicyById(id);
+                policy = policyRepository.SelectPolicyById(id);
             }
             catch
             {
@@ -63,13 +67,11 @@ namespace Benefits.Api.Controllers
 
         // POST api/<PolicyController>
         [HttpPost]
-        public IActionResult Post([FromBody] string value)
+        public IActionResult Post(PolicyDto value)
         {
-            var repo = new PolicyController();
             try
             {
-                //TODO: map the submitted body value to an object. 
-                repo.Post(value);
+                policyRepository.InsertPolicy(value);
             }
             catch
             {
@@ -82,8 +84,7 @@ namespace Benefits.Api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var repo = new PolicyRepository();
-            repo.DeletePolicyById(id);
+            policyRepository.DeletePolicyById(id);
         }
     }
 }

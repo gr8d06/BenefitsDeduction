@@ -4,7 +4,10 @@ using System;
 
 namespace Benefits.Api.Validators
 {
-    public static class DtoValidator
+    /// <summary>
+    /// A Business logic (Bl) validation and action class. 
+    /// </summary>
+    public static class EnrolleeDtoValidator
     {
 
         public static bool ValidateEnrolleeDto(IEnrollee enrollee)
@@ -37,13 +40,10 @@ namespace Benefits.Api.Validators
                 enrollee.PayCheckDeduction = CalculateRate(policy.DependantPrice, enrollee.FirstName);
             }
 
-            EnrolleeRepository enrolleeRepo = new EnrolleeRepository();
-            enrolleeRepo.InsertEnrollee(enrollee);
-            
             return result;
         }
 
-        private static decimal CalculateRate(decimal yearlyRate, string firstName)
+        public static decimal CalculateRate(decimal yearlyRate, string firstName)
         {
             decimal deductionRate = yearlyRate / 26;
             if (firstName.ToLower()[0] == 'a')

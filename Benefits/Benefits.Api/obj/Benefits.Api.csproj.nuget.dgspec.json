@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj": {}
+    "C:\\personalCode\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj": {}
   },
   "projects": {
-    "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj": {
+    "C:\\personalCode\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj",
+        "projectUniqueName": "C:\\personalCode\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj",
         "projectName": "Benefits.Api",
-        "projectPath": "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj",
-        "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-        "outputPath": "C:\\Workspace\\BenefitsDeduction\\Benefits\\Benefits.Api\\obj\\",
+        "projectPath": "C:\\personalCode\\BenefitsDeduction\\Benefits\\Benefits.Api\\Benefits.Api.csproj",
+        "packagesPath": "C:\\Users\\alex.dane\\.nuget\\packages\\",
+        "outputPath": "C:\\personalCode\\BenefitsDeduction\\Benefits\\Benefits.Api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\alex.dane\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,8 +65,20 @@
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[3.1.21, 3.1.21]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
             }
           ],
           "frameworkReferences": {
