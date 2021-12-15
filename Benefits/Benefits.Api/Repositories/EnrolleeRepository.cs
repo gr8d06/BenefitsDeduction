@@ -1,29 +1,32 @@
 ﻿using Benefits.Api.Interfaces;
 using Benefits.Api.Models;
 using Benefits.Api.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Benefits.Api.Repositories
 {
     public class EnrolleeRepository : IEnrolleeRepository
     {
+        private string _connectionString = "";
 
-        // Would not typically leave a connection string in the class
-        // This is for demo only. Store in a config file or secure location. 
-        private string _connectionString = "Data Source=localhost;Initial Catalog=Benefits;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
-        // Would be good to inject in a database interface instead of creating in the repo: loose coupling. 
-        // Entity framework is a good option for managing the ORM and Repos, but this will due for demonstration. 
+        public EnrolleeRepository(IConfiguration configuration)
+        {
+            _connectionString = configuration["ConnectionString"];
+        }
 
 
         //We have the option here to make these Async by wrapping the return object in a Task and giving the keyword Async e.g  async Task<List<IEnrollee>> ....
         // then use the await keyword and a ReadAsync() method on the reader. 
-        public List<IEnrollee> SelectAllEnrollees()
+        public async Task<List<IEnrollee>> SelectAllEnrollees()
         {            
             List<IEnrollee> enrolleeList = new List<IEnrollee>(); ;
             List<IEnrollee> primaryList = new List<IEnrollee>(); ;
@@ -35,7 +38,7 @@ namespace Benefits.Api.Repositories
                 connection.Open();
 
                 using SqlCommand command = new SqlCommand(EnrolleeSprocs.SelectAll, connection);
-                using SqlDataReader reader = command.ExecuteReader();
+                using SqlDataReader reader = await command.ExecuteReaderAsync();
                 while (reader.Read())
                 {
                     var enrollee = MapEnrolleeDto(reader);
@@ -59,9 +62,9 @@ namespace Benefits.Api.Repositories
             return primaryList;
         }
 
-        public IEnrollee SelectEnrolleeById(int Id)
+        public async Task<IEnrollee> SelectEnrolleeById(int Id)
         {
-            IEnrollee enrollee = new EnrolleeDto();
+            EnrolleeDto enrollee = null;
             try
             {
                 //objects in the "using" statements are destroyed after scope leaves the method. 
@@ -71,7 +74,7 @@ namespace Benefits.Api.Repositories
                 using SqlCommand command = new SqlCommand(EnrolleeSprocs.SelectById, connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", Id);
-                using SqlDataReader reader = command.ExecuteReader();
+                using SqlDataReader reader = await command.ExecuteReaderAsync();
 
                 while (reader.Read())
                 {
@@ -86,7 +89,7 @@ namespace Benefits.Api.Repositories
             return enrollee;
         }
 
-        public void InsertEnrollee(IEnrollee enrollee)
+        public async Task<int> InsertEnrollee(IEnrollee enrollee)
         {
             try
             {
@@ -106,13 +109,26 @@ namespace Benefits.Api.Repositories
                 command.Parameters.AddWithValue("@Relation", enrollee.Relation);
                 command.Parameters.AddWithValue("@PayCheckDeduction", enrollee.PayCheckDeduction);
 
-                command.ExecuteNonQuery();
+                command.Parameters.Add("@Id", SqlDbType.Int);
+                command.Parameters["@Id"].Direction = ParameterDirection.Output;
+
+                await command.ExecuteNonQueryAsync();
+                return Convert.ToInt32(command.Parameters["@Id"].Value);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message); //throw this back up the chain for now. Let the controller handle it.
             }
+        }
 
+        public void UpdateEnrollee(IEnrollee enrollee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEnrolleeById(int Id)
+        {
+            throw new NotImplementedException();
         }
 
         private EnrolleeDto MapEnrolleeDto(SqlDataReader reader)
@@ -133,7 +149,6 @@ namespace Benefits.Api.Repositories
             };
         }
 
-
         internal static class EnrolleeSprocs{
             public static string SelectAll => "dbo.SelectAllEnrollees";
             public static string SelectById => "dbo.SelectEnrolleeById";
@@ -142,15 +157,7 @@ namespace Benefits.Api.Repositories
 
         }
 
-        public void UpdateEnrollee(IEnrollee enrollee)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void DeleteEnrolleeById(int Id)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

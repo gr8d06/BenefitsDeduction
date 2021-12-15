@@ -37,8 +37,9 @@ namespace Benefits.Api
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             //inject the repositories into the controllers. 
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddScoped<IEnrolleeRepository, EnrolleeRepository>();
-            services.AddScoped<IPolicyRepository, PolicyRepository>();  
+            services.AddScoped<IPolicyRepository, PolicyRepository>();
 
             services.AddControllers();
         }

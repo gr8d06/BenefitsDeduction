@@ -7,6 +7,8 @@ using Benefits.Api.Models;
 using Benefits.Api.Repositories;
 using Benefits.Api.Validators;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace Benefits.Api.Controllers { 
@@ -16,17 +18,22 @@ namespace Benefits.Api.Controllers {
     public class EnrolleesController : ControllerBase
     {
         IEnrolleeRepository enrolleeRepository = null;
-        public EnrolleesController(IEnrolleeRepository enrolleeRepository)
+        IConfiguration configuration = null;
+        LinkGenerator linkGenerator = null;
+
+        public EnrolleesController(IEnrolleeRepository enrolleeRepository, IConfiguration configuration, LinkGenerator linkGenerator)
         {
             this.enrolleeRepository = enrolleeRepository;
+            this.configuration = configuration;
+            this.linkGenerator = linkGenerator; 
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult<List<EnrolleeDto>>> Get()
         {
             try
             {
-                var enrolleeList = enrolleeRepository.SelectAllEnrollees();
+                var enrolleeList = await enrolleeRepository.SelectAllEnrollees();
                 return Ok(enrolleeList);
             }
             catch
@@ -61,16 +68,18 @@ namespace Benefits.Api.Controllers {
 
 
         [HttpPost]
-        public IActionResult Post(EnrolleeDto enrollee)
+        public async Task<ActionResult<EnrolleeDto>> Post(EnrolleeDto enrollee)
         {
             try
-            {
-               bool result = EnrolleeDtoValidator.ValidateEnrolleeDto(enrollee);
+            { 
+               bool result = await EnrolleeDtoValidator.ValidateEnrolleeDto(enrollee, configuration);
                 if (result)
                 {
-                    EnrolleeRepository enrolleeRepo = new EnrolleeRepository();
-                    enrolleeRepo.InsertEnrollee(enrollee);
-                    return Ok();
+                    EnrolleeRepository enrolleeRepo = new EnrolleeRepository(configuration);
+                    var newId = await enrolleeRepo.InsertEnrollee(enrollee);
+                    var location = linkGenerator.GetPathByAction("Get", "Enrollees", new { id = newId });
+                    var newEnrollee = await enrolleeRepo.SelectEnrolleeById(newId);
+                    return Created(location, newEnrollee); 
                 }
                 return BadRequest();
             }

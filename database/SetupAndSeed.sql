@@ -149,7 +149,7 @@ END;
 	GO
 
 	CREATE PROCEDURE InsertEnrollee 
-	@FirstName NVARCHAR(50), @LastName NVARCHAR(50), @IsActiveAccount BIT, @IsPrimary BIT, @StartDate DATE, @PrimaryId INT, @Address NVARCHAR(256), @PolicyId INT, @Relation NVARCHAR(50), @PayCheckDeduction FLOAT
+	@FirstName NVARCHAR(50), @LastName NVARCHAR(50), @IsActiveAccount BIT, @IsPrimary BIT, @StartDate DATE, @PrimaryId INT, @Address NVARCHAR(256), @PolicyId INT, @Relation NVARCHAR(50), @PayCheckDeduction FLOAT, @Id INT OUTPUT
 	AS
 	BEGIN;
 		
@@ -157,6 +157,7 @@ END;
 		BEGIN
 			INSERT INTO Enrollee (FirstName, LastName, IsActiveAccount, IsPrimary, StartDate, PrimaryId, [Address], PolicyId, Relation, PayCheckDeduction)
 			VALUES	(@FirstName, @LastName, @IsActiveAccount, @IsPrimary, @StartDate, @PrimaryId, @Address, @PolicyId, @Relation, @PayCheckDeduction)
+			SELECT @Id = SCOPE_IDENTITY();
 		END;
 
 	END;
@@ -239,9 +240,9 @@ IF NOT EXISTS(SELECT 1 FROM Enrollee WHERE FirstName IN ('Alex','Aardvark'))
 BEGIN
 	DECLARE @tmpDate DATE;
 	SELECT @tmpDate = GETDATE();
-		EXEC dbo.InsertEnrollee @FirstName = 'Alex',     @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 1, @StartDate = @tmpDate, @PrimaryId = 0, @Address = '5457 S 700 E Whitestown IN, 46075', @PolicyId = 1, @Relation = 'Primary', @PayCheckDeduction = 34.62;
-		EXEC dbo.InsertEnrollee @FirstName = 'Aardvark', @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 0, @StartDate = @tmpDate, @PrimaryId = 1, @Address = '5457 S 700 E Whitestown IN, 46075', @PolicyId = 1, @Relation = 'Child', @PayCheckDeduction = 17.31;
-		EXEC dbo.InsertEnrollee @FirstName = 'Baboon',   @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 0, @StartDate = @tmpDate, @PrimaryId = 1, @Address = '5457 S 700 E Whitestown IN, 46075', @PolicyId = 1, @Relation = 'Child', @PayCheckDeduction = 19.23;
+		EXEC dbo.InsertEnrollee @FirstName = 'Alex',     @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 1, @StartDate = @tmpDate, @PrimaryId = 0, @Address = '5457 S 700 E Whitestown IN, 46075', @PolicyId = 1, @Relation = 'Primary', @PayCheckDeduction = 34.62, @Id='' ;
+		EXEC dbo.InsertEnrollee @FirstName = 'Aardvark', @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 0, @StartDate = @tmpDate, @PrimaryId = 1, @Address = '5457 S 700 E Whitestown IN, 46075', @PolicyId = 1, @Relation = 'Child', @PayCheckDeduction = 17.31, @Id ='';
+		EXEC dbo.InsertEnrollee @FirstName = 'Baboon',   @LastName = 'Dane', @IsActiveAccount = 1, @IsPrimary = 0, @StartDate = @tmpDate, @PrimaryId = 1, @Address = '5457 S 700 E Whitestown IN, 46075', @PolicyId = 1, @Relation = 'Child', @PayCheckDeduction = 19.23, @Id ='';
 END;
 
 

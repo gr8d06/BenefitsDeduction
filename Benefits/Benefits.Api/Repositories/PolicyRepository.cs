@@ -1,16 +1,22 @@
 ﻿using Benefits.Api.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace Benefits.Api.Repositories
 {
     public class PolicyRepository : IPolicyRepository
     {
-        private string _connectionString = "Data Source=localhost;Initial Catalog=Benefits;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string _connectionString = "";
+        public PolicyRepository(IConfiguration configuration)
+        {
+            _connectionString = configuration["ConnectionString"];
+        }
 
-        public List<PolicyDto> SelectAllPolicies()
+        public async Task<List<PolicyDto>> SelectAllPolicies()
         {
             var policyList = new List<PolicyDto>();
             try
@@ -20,7 +26,7 @@ namespace Benefits.Api.Repositories
 
                 using SqlCommand command = new SqlCommand(PolicySprocs.SelectAll, connection);
                 command.CommandType = CommandType.StoredProcedure;
-                using SqlDataReader reader = command.ExecuteReader();
+                using SqlDataReader reader = await command.ExecuteReaderAsync();
                 while (reader.Read())
                 {
                     var policy = MapPolicyDto(reader);
@@ -35,7 +41,7 @@ namespace Benefits.Api.Repositories
 
         }
 
-        public PolicyDto SelectPolicyById(int id)
+        public async Task<PolicyDto> SelectPolicyById(int id)
         {
             var policy = new PolicyDto();
             try
@@ -47,7 +53,7 @@ namespace Benefits.Api.Repositories
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Id", id);
 
-                using SqlDataReader reader = command.ExecuteReader();
+                using SqlDataReader reader = await command.ExecuteReaderAsync();
                 while (reader.Read())
                 {
                     policy = MapPolicyDto(reader);

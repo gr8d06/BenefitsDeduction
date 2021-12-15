@@ -1,6 +1,8 @@
 ﻿using Benefits.Api.Interfaces;
 using Benefits.Api.Repositories;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Threading.Tasks;
 
 namespace Benefits.Api.Validators
 {
@@ -10,12 +12,12 @@ namespace Benefits.Api.Validators
     public static class EnrolleeDtoValidator
     {
 
-        public static bool ValidateEnrolleeDto(IEnrollee enrollee)
+        public static async Task<bool> ValidateEnrolleeDto(IEnrollee enrollee, IConfiguration configuration)
         {
             bool result = true;
 
-            PolicyRepository polRepo = new PolicyRepository();
-            var policy = polRepo.SelectPolicyById(1);  //HARD CODED for demo and time sake only. 
+            PolicyRepository polRepo = new PolicyRepository(configuration);
+            var policy = await polRepo.SelectPolicyById(1);  //HARD CODED for demo and time sake only. 
 
             if (enrollee == null ||
                 string.IsNullOrEmpty(enrollee.FirstName) ||

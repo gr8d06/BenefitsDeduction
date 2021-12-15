@@ -1,4 +1,6 @@
 ﻿using Benefits.Api.Interfaces;
+using Benefits.Api.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,11 @@ namespace Benefits.Api.Repositories
 {
     public interface IEnrolleeRepository
     {
-        public List<IEnrollee> SelectAllEnrollees();
-        public IEnrollee SelectEnrolleeById(int Id);
+        
+        public Task<List<IEnrollee>> SelectAllEnrollees();
+        public Task<IEnrollee> SelectEnrolleeById(int Id);
 
-        public void InsertEnrollee(IEnrollee enrollee);
+        public Task<int>InsertEnrollee(IEnrollee enrollee);
         public void DeleteEnrolleeById(int Id);
         public void UpdateEnrollee(IEnrollee enrollee);
     }

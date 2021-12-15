@@ -5,7 +5,6 @@ function NewEnrolleeForm(props) {
     const { setShowInputDialog, setrefreshList } = props;
     const [newEnrollee, setNewEnrollee] = useState({ firstName: "", lastName: "", address: "", isPrimary: true, primaryId: 0, relation: "" })
 
-
     const [infoText, setinfoText] = useState("")
 
     const handleSubmit = async (e) => {
@@ -17,7 +16,7 @@ function NewEnrolleeForm(props) {
             body: JSON.stringify(newEnrollee)
         })
 
-        if (result.status === 200) {
+        if (result.status === 200 || result.status === 201) {
             setinfoText("");
             setrefreshList(true);
             setShowInputDialog(false);
